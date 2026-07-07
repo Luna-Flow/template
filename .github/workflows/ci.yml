@@ -27,11 +27,6 @@ jobs:
           curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
 
-      - name: version
-        run: |
-          moon version --all
-          moonrun --version
-
       - name: update registry
         run: moon update
 
