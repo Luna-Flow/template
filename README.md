@@ -19,7 +19,9 @@ Use `just` for local workflows:
 ```bash
 just fmt
 just check
+just check-all
 just test
+just test-all
 just ready
 just update-deps
 ```

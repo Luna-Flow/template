@@ -5,6 +5,10 @@
 - Format all MoonBit code with `just fmt`.
 - Keep files organized by package boundary first, then by behavior.
 - Keep comments short and technical. Explain contracts, invariants, or non-obvious implementation choices.
+- Separate top-level items with `///|`.
+- Use `derive(Debug)` for structural output; implement `Show` only for types with a real text format.
+- Declare trait-method promotions explicitly with `pub extend T with Trait::{...}` in the package's `extends.mbt`; keep deprecated items in `deprecated.mbt`.
+- Package and module manifests use the `moon.pkg` / `moon.mod` DSL; do not add `moon.pkg.json` or `moon.mod.json`.
 
 ## Naming Conventions
 
@@ -17,8 +21,11 @@
 
 - Add or update tests whenever behavior changes.
 - Use package-local `*_test.mbt` or `*_wbtest.mbt` files as appropriate.
+- In blackbox tests (`*_test.mbt`), qualify names from the package under test, such as `@luna-template.hello()`.
+- Declare test-only fixture types as `priv`.
 - Run `just test` for normal validation and `just ready` before opening a PR.
-- Regenerate public interface files with `just info` when public APIs change.
+- Regenerate public interface files with `just info` when public APIs change, and commit the `pkg.generated.mbti` diff.
+- Run `just check-all` and `just test-all` when the change touches target-specific code.
 
 ## Documentation
 

@@ -5,7 +5,7 @@ the first paragraph; here the goal is to call the package's only function.
 
 ```moonbit
 test "greet" {
-  inspect(hello(), content="hello from Luna-Flow")
+  inspect(@luna-template.hello(), content="hello from Luna-Flow")
 }
 ```
 
