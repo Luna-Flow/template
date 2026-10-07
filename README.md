@@ -7,7 +7,7 @@ This repository is the standard starter layout for Luna-Flow MoonBit packages.
 1. Rename the module in `moon.mod`.
 2. Update `version`, `repository`, `keywords`, and `description` in `moon.mod`.
 3. Replace this README with the package-specific overview.
-4. Replace the placeholder documentation under `doc/`.
+4. Replace the placeholder documentation under `doc/manual/` and set `title` and `summary` in `doc/conf.json`.
 5. Replace the placeholder source package under `src/`.
 6. Update `NOTICE` if the generated repository needs a more specific copyright notice.
 7. Configure the `LUNA_MOONCAKE` repository secret before using the publish workflow.
@@ -28,17 +28,20 @@ just update-deps
 
 ## Documentation
 
-Documentation lives under `doc/` and is organized by locale:
+The manual follows the
+[Luna-Flow documentation standard](https://luna-flow.github.io/en/contribute/documentation_standard/).
+Published repositories appear at `https://luna-flow.github.io/en/<repo>/`.
 
-- `doc/en_US`
-- `doc/zh_CN`
-- `doc/ja_JP`
+- `doc/conf.json`: repository title, one-sentence summary, and translated locales.
+- `doc/manual/index.md`: overview of the repository.
+- `doc/manual/api/<package>.md`, `doc/manual/design/<package>.md`, and
+  `doc/manual/tutorial/<package>.md`: one page per package in each chapter.
+- `doc/locale/`: gettext catalogs with the Chinese and Japanese translations.
 
-Each package or subsystem directory should contain:
-
-- `api.md`
-- `tutorial.md`
-- `design.md`
+English pages are the only source. After editing them, refresh the catalogs
+with `lunadoc update` and validate with `lunadoc check --compile`; the `Docs`
+workflow runs the same check on every pull request. See
+[CONTRIBUTING.md](./CONTRIBUTING.md) for the full workflow.
 
 ## Publishing
 

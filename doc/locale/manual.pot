@@ -1,0 +1,104 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Luna-Flow documentation\n"
+"Report-Msgid-Bugs-To: https://github.com/Luna-Flow\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: conf.json:summary
+msgid "Template repository for Luna-Flow MoonBit packages."
+msgstr ""
+
+#: manual/api/core.md:1
+msgid "Core API"
+msgstr ""
+
+#: manual/api/core.md:3
+msgid "Replace this page with the public API of the package. `pkg.generated.mbti` is the authority: document every public name it lists, grouped by purpose, and nothing else."
+msgstr ""
+
+#: manual/api/core.md:9
+msgid "Returns the fixed greeting `\"hello from Luna-Flow\"`."
+msgstr ""
+
+#: manual/design/core.md:1
+msgid "Core design"
+msgstr ""
+
+#: manual/design/core.md:3
+msgid "Replace this page with the design of the package: the goals it serves, the constraints it works under, the decisions taken and the alternatives rejected."
+msgstr ""
+
+#: manual/design/core.md:6
+msgid "Decisions"
+msgstr ""
+
+#: manual/design/core.md:8
+msgid "Give each important decision its own section. State the decision, the reason for it, and the alternatives that were considered."
+msgstr ""
+
+#: manual/design/core.md:11
+msgid "Boundaries"
+msgstr ""
+
+#: manual/design/core.md:13
+msgid "End with what the package deliberately does not do."
+msgstr ""
+
+#: manual/index.md:1
+msgid "Luna-Flow template"
+msgstr ""
+
+#: manual/index.md:3
+msgid "Replace this page with an overview of the repository: what it provides, who it is for, and where a reader should start."
+msgstr ""
+
+#: manual/index.md:6
+msgid "Packages"
+msgstr ""
+
+#: manual/index.md:8
+msgid "Package"
+msgstr ""
+
+#: manual/index.md:8
+msgid "Contents"
+msgstr ""
+
+#: manual/index.md:10
+msgid "One sentence on what the package provides."
+msgstr ""
+
+#: manual/index.md:12
+msgid "Add one row for every documented package. Each documented package has a page in the API, Design and Tutorial chapters, named after its path under `src/`; this template's root package is documented as `core`."
+msgstr ""
+
+#: manual/index.md:16
+msgid "Writing the manual"
+msgstr ""
+
+#: manual/index.md:18
+msgid "English pages in `doc/manual` are the only source. After editing them, run `lunadoc update` to refresh the translation catalogs in `doc/locale`, and `lunadoc check` before opening a pull request. The [documentation standard](https://luna-flow.github.io/en/contribute/documentation_standard/) describes the layout and what each page contains."
+msgstr ""
+
+#: manual/tutorial/core.md:1
+msgid "Core tutorial"
+msgstr ""
+
+#: manual/tutorial/core.md:3
+msgid "Replace this page with a task worked from start to finish. State the goal in the first paragraph; here the goal is to call the package's only function."
+msgstr ""
+
+#: manual/tutorial/core.md:12
+msgid "Keep examples small and make sure they compile."
+msgstr ""
+
+#: manual/tutorial/core.md:14
+msgid "Next steps"
+msgstr ""
+
+#: manual/tutorial/core.md:16
+msgid "See the [API reference](../api/core.md) for every public name and the [design note](../design/core.md) for why the package works as it does."
+msgstr ""

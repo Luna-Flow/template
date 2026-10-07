@@ -1,0 +1,104 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Luna-Flow documentation\n"
+"Report-Msgid-Bugs-To: https://github.com/Luna-Flow\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: conf.json:summary
+msgid "Template repository for Luna-Flow MoonBit packages."
+msgstr "Luna-Flow MoonBit 包的模板仓库。"
+
+#: manual/api/core.md:1
+msgid "Core API"
+msgstr "Core API"
+
+#: manual/api/core.md:3
+msgid "Replace this page with the public API of the package. `pkg.generated.mbti` is the authority: document every public name it lists, grouped by purpose, and nothing else."
+msgstr "请将此页面替换为该包的公开 API。`pkg.generated.mbti` 是权威来源：按用途分组记录其中列出的每个公开名称，不记录其他内容。"
+
+#: manual/api/core.md:9
+msgid "Returns the fixed greeting `\"hello from Luna-Flow\"`."
+msgstr "返回固定的问候语 `\"hello from Luna-Flow\"`。"
+
+#: manual/design/core.md:1
+msgid "Core design"
+msgstr "Core 设计"
+
+#: manual/design/core.md:3
+msgid "Replace this page with the design of the package: the goals it serves, the constraints it works under, the decisions taken and the alternatives rejected."
+msgstr "请将此页面替换为该包的设计：它服务的目标、所受的约束、做出的决策以及被否决的备选方案。"
+
+#: manual/design/core.md:6
+msgid "Decisions"
+msgstr "决策"
+
+#: manual/design/core.md:8
+msgid "Give each important decision its own section. State the decision, the reason for it, and the alternatives that were considered."
+msgstr "每个重要决策单独成节。写明决策本身、做出该决策的理由，以及曾考虑过的备选方案。"
+
+#: manual/design/core.md:11
+msgid "Boundaries"
+msgstr "边界"
+
+#: manual/design/core.md:13
+msgid "End with what the package deliberately does not do."
+msgstr "最后说明该包有意不做的事情。"
+
+#: manual/index.md:1
+msgid "Luna-Flow template"
+msgstr "Luna-Flow 模板"
+
+#: manual/index.md:3
+msgid "Replace this page with an overview of the repository: what it provides, who it is for, and where a reader should start."
+msgstr "请将此页面替换为仓库概览：它提供什么、面向哪些读者，以及读者应从哪里开始。"
+
+#: manual/index.md:6
+msgid "Packages"
+msgstr "包"
+
+#: manual/index.md:8
+msgid "Package"
+msgstr "包"
+
+#: manual/index.md:8
+msgid "Contents"
+msgstr "内容"
+
+#: manual/index.md:10
+msgid "One sentence on what the package provides."
+msgstr "用一句话说明该包提供的功能。"
+
+#: manual/index.md:12
+msgid "Add one row for every documented package. Each documented package has a page in the API, Design and Tutorial chapters, named after its path under `src/`; this template's root package is documented as `core`."
+msgstr "为每个已文档化的包添加一行。每个已文档化的包在 API、设计和教程三个章节中各有一页，页面以其在 `src/` 下的路径命名；本模板的根包以 `core` 记录。"
+
+#: manual/index.md:16
+msgid "Writing the manual"
+msgstr "编写手册"
+
+#: manual/index.md:18
+msgid "English pages in `doc/manual` are the only source. After editing them, run `lunadoc update` to refresh the translation catalogs in `doc/locale`, and `lunadoc check` before opening a pull request. The [documentation standard](https://luna-flow.github.io/en/contribute/documentation_standard/) describes the layout and what each page contains."
+msgstr "`doc/manual` 中的英文页面是唯一的源文本。编辑后运行 `lunadoc update` 以刷新 `doc/locale` 中的翻译目录，并在提交 pull request 前运行 `lunadoc check`。[文档标准](https://luna-flow.github.io/en/contribute/documentation_standard/)说明了目录布局以及每个页面应包含的内容。"
+
+#: manual/tutorial/core.md:1
+msgid "Core tutorial"
+msgstr "Core 教程"
+
+#: manual/tutorial/core.md:3
+msgid "Replace this page with a task worked from start to finish. State the goal in the first paragraph; here the goal is to call the package's only function."
+msgstr "请将此页面替换为一个从头到尾完成的任务。在第一段写明目标；这里的目标是调用该包唯一的函数。"
+
+#: manual/tutorial/core.md:12
+msgid "Keep examples small and make sure they compile."
+msgstr "示例要保持简短，并确保能够编译。"
+
+#: manual/tutorial/core.md:14
+msgid "Next steps"
+msgstr "下一步"
+
+#: manual/tutorial/core.md:16
+msgid "See the [API reference](../api/core.md) for every public name and the [design note](../design/core.md) for why the package works as it does."
+msgstr "参阅 [API 参考](../api/core.md)了解每个公开名称，参阅[设计说明](../design/core.md)了解该包为何如此工作。"

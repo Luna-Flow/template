@@ -1,7 +1,5 @@
 # Contribution Guidelines
 
-View this guide in [zh_CN](../zh_CN/CONTRIBUTING.md) | [ja_JP](../ja_JP/CONTRIBUTING.md)
-
 ## Code Style
 
 - Format all MoonBit code with `just fmt`.
@@ -21,6 +19,16 @@ View this guide in [zh_CN](../zh_CN/CONTRIBUTING.md) | [ja_JP](../ja_JP/CONTRIBU
 - Use package-local `*_test.mbt` or `*_wbtest.mbt` files as appropriate.
 - Run `just test` for normal validation and `just ready` before opening a PR.
 - Regenerate public interface files with `just info` when public APIs change.
+
+## Documentation
+
+- Write the manual in English under `doc/manual`; translations live only in the
+  gettext catalogs under `doc/locale`.
+- Run `lunadoc update` after editing pages and commit the refreshed catalogs
+  with them.
+- Run `lunadoc check --compile` before opening a PR. The `Docs` workflow runs
+  the same check.
+- Follow the [Luna-Flow documentation standard](https://luna-flow.github.io/en/contribute/documentation_standard/).
 
 ## Dependencies
 

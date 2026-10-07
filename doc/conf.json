@@ -1,0 +1,8 @@
+{
+  "title": "template",
+  "summary": "Template repository for Luna-Flow MoonBit packages.",
+  "locales": [
+    "zh_CN",
+    "ja_JP"
+  ]
+}
