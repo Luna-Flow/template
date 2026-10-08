@@ -1,23 +1,30 @@
 # core tutorial
 
-<!-- Tutorial page: state the goal in the first paragraph, then Quick start, Everyday tasks, Going further, Common pitfalls and Next steps. Every `moonbit` block must compile; show the output of each program. Keep the mathematics on the design page. -->
+<!-- Tutorial page: state the goal in the first paragraph, add an "I want to | Use" table, then Quick start, Everyday tasks, Going further, Common pitfalls and Next steps. Every `moonbit` block must compile; check outputs with `inspect(..., content=...)`. Keep the mathematics on the design page. -->
 
 This tutorial takes you from adding `luna-template` to a project to using its
 greeting in your own code and tests. By the end you can call `hello`, build
 messages from it, pass it around as a function value and pin its value in a
 test.
 
+| I want to | Use |
+| --- | --- |
+| get the greeting | `@luna-template.hello()` |
+| build a message from it | string interpolation, `"\{@luna-template.hello()}, Ada!"` |
+| pin it in a test | `inspect(@luna-template.hello(), content="hello from Luna-Flow")` |
+| pass it as a message source | the function value `@luna-template.hello` of type `() -> String` |
+
 ## Quick start
 
 Add the module to your project:
 
-```text
+```bash
 moon add Luna-Flow/luna-template@0.1.0
 ```
 
 Import the package in the `moon.pkg` of an executable package:
 
-```text
+```moonbit nocheck
 import {
   "Luna-Flow/luna-template",
 }

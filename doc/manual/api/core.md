@@ -1,16 +1,27 @@
 # core API
 
-<!-- API page: every public name in pkg.generated.mbti, grouped by purpose, and nothing else. Each item: a heading named after it in code, a first sentence saying what it does, the exact signature in an `mbti` block, its semantics, and a short example that compiles. -->
+<!-- API page: Purpose, Importing, then every public name in pkg.generated.mbti, grouped by purpose, and nothing else. Each item: a heading named after it in code, a first sentence saying what it does, the exact signature in an `mbti` block, its laws and edge behaviour (in TeX where mathematical), and a short example that compiles. -->
 
-The root package of `Luna-Flow/luna-template`, imported as `@luna-template`,
-exports one function. Its public surface, as recorded in
-`src/pkg.generated.mbti`, is:
+## Purpose
 
-```mbti
-package "Luna-Flow/luna-template"
+The root package of `Luna-Flow/luna-template` exports one function, `hello`,
+which returns a fixed greeting. It exists so that a new repository has one
+public item to build, test and document. Its public surface is recorded in
+`src/pkg.generated.mbti`; the reasons behind it are in the
+[design](../design/core.md).
 
-pub fn hello() -> String
+## Importing
+
+Add the package to your `moon.pkg`:
+
+```moonbit nocheck
+import {
+  "Luna-Flow/luna-template",
+}
 ```
+
+The examples on this page call it as `@luna-template`. A package with many
+items would bring them into scope here with one `using @pkg { ... }` block.
 
 ## Greeting
 

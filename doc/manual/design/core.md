@@ -1,6 +1,6 @@
 # core design
 
-<!-- Design page: Design goal, Mathematical background (definitions in TeX), Design decisions (problem, options, choice and why, with derivations), Correctness / invariants, Alternatives rejected, and Boundaries last. Describe only mathematics the code implements. -->
+<!-- Design page: Design goal, Constraints, Mathematical background (definitions and derivations in TeX), Design decisions (problem, options, choice and why), Correctness / invariants, Alternatives rejected, and Boundaries last. Describe only mathematics the code implements. -->
 
 ## Design goal
 
@@ -10,6 +10,14 @@ every backend, `moon info` needs a public item to record in the interface
 file, the test suite needs a behaviour to check, and each chapter of the
 manual needs an item to describe. `hello` is the smallest item that serves all
 four, and its behaviour can be stated exactly in one equation.
+
+## Constraints
+
+- The package must build and test on every backend (`wasm-gc`, `wasm`, `js`
+  and `native`) without target-specific code.
+- It must not depend on other packages, so that a new repository starts with
+  an empty dependency list.
+- Every new repository deletes it, so it must be trivial to remove.
 
 ## Mathematical background
 
@@ -42,8 +50,11 @@ So $\operatorname{Hom}(\mathbf{1}, S) \cong S$: specifying a pure function
 without arguments is the same as specifying one value.[^unit] The attachment
 writes the argument out in full.
 
-[^unit]: In category theory this says that the one-point set is a generator of
-the category of sets: a set is recovered from the maps out of $\mathbf{1}$.
+[^unit]: In category theory the bijection is natural in $S$, so the functor
+$\operatorname{Hom}(\mathbf{1}, -)$ is isomorphic to the identity functor on
+sets: a set is recovered, up to isomorphism, from the maps out of
+$\mathbf{1}$. In particular $\mathbf{1}$ is a generator: two different maps
+$g \neq h : S \to T$ differ at some point $\star \mapsto s$.
 
 [Constant functions and the unit type](../../attachments/design_core_constant-functions.typ)
 
@@ -75,7 +86,10 @@ $$
 $$
 
 and a single passing `inspect(@luna-template.hello(), content=c)` shows
-$\texttt{hello} = \Psi(c)$, that is, the function equals its specification.
+$\texttt{hello}(\star) = c$, hence $\texttt{hello} = \Psi(c)$ by the
+bijection above: the function equals its specification. The argument uses
+that `hello` is pure (the determinism invariant below) and holds for the
+backend the test runs on; `just test-all` repeats it on all four.
 The package therefore has one test and no property tests; adding more would
 check nothing new.
 
