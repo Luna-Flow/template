@@ -33,6 +33,9 @@ check-all:
 test:
     moon test
 
+test-all:
+    for target in wasm-gc js native wasm; do moon test --target "$target"; done
+
 test-coverage:
     moon clean
     moon coverage clean
@@ -52,7 +55,7 @@ tree:
 
 ready:
     moon fmt
-    moon check
+    moon check --target all
     moon info
     moon clean
     moon coverage clean
