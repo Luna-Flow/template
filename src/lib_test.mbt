@@ -1,4 +1,4 @@
 ///|
 test "hello" {
-  inspect(hello(), content="hello from Luna-Flow")
+  inspect(@luna-template.hello(), content="hello from Luna-Flow")
 }
