@@ -39,9 +39,15 @@ in your `moon.pkg`.
 2. Replace the sample package under `src/` with your packages, and run
    `just info` to regenerate each `pkg.generated.mbti`.
 3. Rewrite `doc/manual/` for your packages, keeping the structure of the
-   sample pages, and set `title` and `summary` in `doc/conf.json`. The HTML
+   sample pages, and set `title` and `summary` in `doc/conf.json`. The pages
+   follow the [luna-generic](https://lunaflow.cn/en/luna-generic/) layout:
+   an overview with install, pages table and reading paths, and for each
+   package an API page (purpose, importing, one heading per public item), a
+   tutorial (task table, quick start, everyday tasks, pitfalls) and a design
+   page (goal, constraints, mathematics, decisions, boundaries). The HTML
    comments in the sample pages say what goes where; delete them when you are
-   done.
+   done. Run `node <site>/tools/lunadoc/cli.mjs update <repo>` and translate the
+   catalogs after the English is final.
 4. Replace this README with one for your repository, and start the
    `CHANGELOG.md` history afresh.
 5. Update `NOTICE` if your repository needs a more specific copyright notice.

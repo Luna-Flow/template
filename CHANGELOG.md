@@ -25,4 +25,9 @@ All notable changes to this repository are recorded here. The format follows
 - Documentation rewritten (API, tutorial and design pages for `core`, with a
   Typst attachment) as a model of the documentation standard, with zh_CN and
   ja_JP translations.
+- The manual follows the luna-generic layout: the overview has the release
+  line, install, pages table, exported functions, reading paths and
+  validation sections; the API page has purpose and importing sections; the
+  tutorial has a task table; the design page has a constraints section and a
+  corrected footnote on the unit type.
 
