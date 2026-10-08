@@ -8,97 +8,318 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: conf.json:summary
-msgid "Template repository for Luna-Flow MoonBit packages."
+msgid "Starter repository with the build, test, CI and documentation setup shared by every Luna-Flow MoonBit library."
 msgstr ""
 
 #: manual/api/core.md:1
-msgid "Core API"
+msgid "core API"
 msgstr ""
 
-#: manual/api/core.md:3
-msgid "Replace this page with the public API of the package. `pkg.generated.mbti` is the authority: document every public name it lists, grouped by purpose, and nothing else."
+#: manual/api/core.md:5
+msgid "The root package of `Luna-Flow/luna-template`, imported as `@luna-template`, exports one function. Its public surface, as recorded in `src/pkg.generated.mbti`, is:"
 msgstr ""
 
-#: manual/api/core.md:9
-msgid "Returns the fixed greeting `\"hello from Luna-Flow\"`."
+#: manual/api/core.md:15
+msgid "Greeting"
+msgstr ""
+
+#: manual/api/core.md:21
+msgid "Returns the fixed greeting `hello from Luna-Flow`."
+msgstr ""
+
+#: manual/api/core.md:27
+msgid "`hello` takes no arguments and returns the same 20-character string on every call. It has no preconditions, never raises and never aborts, and it runs in constant time. Because it has no inputs and no effects, it satisfies the law"
+msgstr ""
+
+#: manual/api/core.md:35
+msgid "on every backend, so any call can be replaced by the literal. The [design note](../design/core.md) explains why a constant function was chosen and why a single test checks it completely."
 msgstr ""
 
 #: manual/design/core.md:1
-msgid "Core design"
+msgid "core design"
 msgstr ""
 
-#: manual/design/core.md:3
-msgid "Replace this page with the design of the package: the goals it serves, the constraints it works under, the decisions taken and the alternatives rejected."
+#: manual/design/core.md:5
+msgid "Design goal"
 msgstr ""
 
-#: manual/design/core.md:6
-msgid "Decisions"
+#: manual/design/core.md:7
+msgid "The root package exists so that a repository created from the template is complete on its first commit. Continuous integration needs code to build on every backend, `moon info` needs a public item to record in the interface file, the test suite needs a behaviour to check, and each chapter of the manual needs an item to describe. `hello` is the smallest item that serves all four, and its behaviour can be stated exactly in one equation."
 msgstr ""
 
-#: manual/design/core.md:8
-msgid "Give each important decision its own section. State the decision, the reason for it, and the alternatives that were considered."
+#: manual/design/core.md:14
+msgid "Mathematical background"
 msgstr ""
 
-#: manual/design/core.md:11
+#: manual/design/core.md:18
+msgid "Read a MoonBit type as the set of its values. The type `Unit` has exactly one value, so it is the one-point set $\\mathbf{1} = \\{\\star\\}$, and a function that takes no arguments and has no effects is a function $f : \\mathbf{1} \\to S$. Such a function is determined by its single value."
+msgstr ""
+
+#: manual/design/core.md:29
+msgid "The two maps are inverse to each other. For every $s \\in S$ and every $f : \\mathbf{1} \\to S$:"
+msgstr ""
+
+#: manual/design/core.md:41
+msgid "So $\\operatorname{Hom}(\\mathbf{1}, S) \\cong S$: specifying a pure function without arguments is the same as specifying one value.[^unit] The attachment writes the argument out in full."
+msgstr ""
+
+#: manual/design/core.md:45
+msgid "In category theory this says that the one-point set is a generator of the category of sets: a set is recovered from the maps out of $\\mathbf{1}$."
+msgstr ""
+
+#: manual/design/core.md:48
+msgid "[Constant functions and the unit type](../../attachments/design_core_constant-functions.typ)"
+msgstr ""
+
+#: manual/design/core.md:50
+msgid "Design decisions"
+msgstr ""
+
+#: manual/design/core.md:52
+msgid "A constant function as the only item"
+msgstr ""
+
+#: manual/design/core.md:54
+msgid "The problem is to give a new repository one public item whose behaviour can be documented and tested completely, on every backend, without tying the template to a mathematical domain. Three shapes were considered: a constant function `hello() -> String`, a function of an argument such as `greet(name) -> String`, and a constant value `pub let greeting : String`."
+msgstr ""
+
+#: manual/design/core.md:60
+msgid "The constant function was chosen. By the background above, its whole specification is the single equation $\\texttt{hello}() = \\texttt{\"hello from Luna-Flow\"}$, so the API page can state it exactly and the tests can check it exactly. A function of an argument has one equation per input string, infinitely many, so any test only samples it. A constant value is just as simple, but it would model a `pub let` item rather than the function signatures that real packages mostly export."
+msgstr ""
+
+#: manual/design/core.md:68
+msgid "One snapshot test is exhaustive"
+msgstr ""
+
+#: manual/design/core.md:70
+msgid "A test suite proves correctness only when it covers every input. For `hello` the input set is $\\mathbf{1}$, so the count of cases is"
+msgstr ""
+
+#: manual/design/core.md:77
+msgid "and a single passing `inspect(@luna-template.hello(), content=c)` shows $\\texttt{hello} = \\Psi(c)$, that is, the function equals its specification. The package therefore has one test and no property tests; adding more would check nothing new."
+msgstr ""
+
+#: manual/design/core.md:82
+msgid "The root package is documented as `core`"
+msgstr ""
+
+#: manual/design/core.md:84
+msgid "The standard names a page after the package path under the source root. The root package has the empty path, so the template uses the name `core`, as `luna-generic` does. A repository that adds `src/<path>` documents it as `<path>.md` in each chapter."
+msgstr ""
+
+#: manual/design/core.md:89
+msgid "Correctness / invariants"
+msgstr ""
+
+#: manual/design/core.md:91
+msgid "**Determinism.** `hello` reads no state and performs no effects, so $\\texttt{hello}() = \\texttt{hello}()$ for any two calls, on any backend."
+msgstr ""
+
+#: manual/design/core.md:93
+msgid "**Length.** The result has $5 + 1 + 4 + 1 + 9 = 20$ UTF-16 code units, for `hello`, the two spaces, `from` and `Luna-Flow`. The test asserts this."
+msgstr ""
+
+#: manual/design/core.md:95
+msgid "**Portability.** The package has no target-specific files, so `wasm-gc`, `wasm`, `js` and `native` build the same code; `just check-all` and `just test-all` check all four."
+msgstr ""
+
+#: manual/design/core.md:98
+msgid "**Cost.** A call returns a string literal and takes constant time."
+msgstr ""
+
+#: manual/design/core.md:100
+msgid "Alternatives rejected"
+msgstr ""
+
+#: manual/design/core.md:102
+msgid "**An empty package.** It leaves the interface file, the tests and the API page with nothing to check, so mistakes in the setup go unnoticed until the first real item arrives."
+msgstr ""
+
+#: manual/design/core.md:105
+msgid "**A small numeric example.** It would tie the template to one domain and to the Luna-Flow packages that domain needs, and every new repository would have to remove those dependencies first."
+msgstr ""
+
+#: manual/design/core.md:108
+msgid "**A greeting with an argument.** As derived above, it cannot be tested exhaustively, which would make the model test suite misleading."
+msgstr ""
+
+#: manual/design/core.md:111
 msgid "Boundaries"
 msgstr ""
 
-#: manual/design/core.md:13
-msgid "End with what the package deliberately does not do."
+#: manual/design/core.md:113
+msgid "The package does not read input, print, or depend on any other package. It does not localise the greeting: the manual is translated, but `hello` always returns the English text. It is not meant to be depended on; a repository created from the template replaces it with its own packages."
 msgstr ""
 
 #: manual/index.md:1
-msgid "Luna-Flow template"
+msgid "template"
 msgstr ""
 
-#: manual/index.md:3
-msgid "Replace this page with an overview of the repository: what it provides, who it is for, and where a reader should start."
+#: manual/index.md:5
+msgid "The `template` repository, with the MoonBit module `Luna-Flow/luna-template`, is the starter repository that every new Luna-Flow MoonBit library is created from. It contains the build, test, CI and documentation setup that the organisation expects, and one small root package with a single function, `hello`, so that each of those pieces has something real to check from the first commit. This manual documents that package, and it is written to serve as a model of the [documentation standard](https://lunaflow.cn/en/contribute/documentation_standard/): when you start a new repository, keep the structure of these pages and replace their content."
 msgstr ""
 
-#: manual/index.md:6
+#: manual/index.md:15
 msgid "Packages"
 msgstr ""
 
-#: manual/index.md:8
+#: manual/index.md:19
 msgid "Package"
 msgstr ""
 
-#: manual/index.md:8
+#: manual/index.md:19
+msgid "Import path"
+msgstr ""
+
+#: manual/index.md:19
 msgid "Contents"
 msgstr ""
 
-#: manual/index.md:10
-msgid "One sentence on what the package provides."
+#: manual/index.md:19
+msgid "Pages"
 msgstr ""
 
-#: manual/index.md:12
-msgid "Add one row for every documented package. Each documented package has a page in the API, Design and Tutorial chapters, named after its path under `src/`; this template's root package is documented as `core`."
+#: manual/index.md:21
+msgid "The fixed greeting `hello`."
 msgstr ""
 
-#: manual/index.md:16
-msgid "Writing the manual"
+#: manual/index.md:21
+msgid "[API](api/core.md) · [Tutorial](tutorial/core.md) · [Design](design/core.md)"
 msgstr ""
 
-#: manual/index.md:18
-msgid "English pages in `doc/manual` are the only source. After editing them, run `lunadoc update` to refresh the translation catalogs in `doc/locale`, and `lunadoc check` before opening a pull request. The [documentation standard](https://luna-flow.github.io/en/contribute/documentation_standard/) describes the layout and what each page contains."
+#: manual/index.md:23
+msgid "The package at the source root (`src/`) is documented under the name `core`. A package at `src/<path>` would be documented as `api/<path>.md`, `tutorial/<path>.md` and `design/<path>.md`."
+msgstr ""
+
+#: manual/index.md:27
+msgid "Reading paths"
+msgstr ""
+
+#: manual/index.md:29
+msgid "If you are new to the package, start with the [tutorial](tutorial/core.md): it installs the module, calls `hello` and pins its value in a test. If you already use it, the [API reference](api/core.md) lists every public name with its exact signature and semantics. If you want to change the package, or create a new repository from this template, read the [design note](design/core.md) for the reasoning behind it and [CONTRIBUTING.md](../../CONTRIBUTING.md) for the workflow."
+msgstr ""
+
+#: manual/index.md:37
+msgid "Toolchain"
+msgstr ""
+
+#: manual/index.md:39
+msgid "The module uses the `moon.mod` and `moon.pkg` manifest syntax and needs MoonBit `moonc` 0.10 or later. Local workflows run through `just`; the manual is checked with `lunadoc`, which needs Node.js, and Typst attachments need `typst`."
+msgstr ""
+
+#: manual/index.md:44
+msgid "Installation"
+msgstr ""
+
+#: manual/index.md:46
+#: manual/tutorial/core.md:12
+msgid "Add the module to your project:"
+msgstr ""
+
+#: manual/index.md:52
+msgid "Then import the package in the `moon.pkg` of the package that uses it:"
+msgstr ""
+
+#: manual/index.md:60
+msgid "The package is then available as `@luna-template`."
 msgstr ""
 
 #: manual/tutorial/core.md:1
-msgid "Core tutorial"
+msgid "core tutorial"
 msgstr ""
 
-#: manual/tutorial/core.md:3
-msgid "Replace this page with a task worked from start to finish. State the goal in the first paragraph; here the goal is to call the package's only function."
+#: manual/tutorial/core.md:5
+msgid "This tutorial takes you from adding `luna-template` to a project to using its greeting in your own code and tests. By the end you can call `hello`, build messages from it, pass it around as a function value and pin its value in a test."
 msgstr ""
 
-#: manual/tutorial/core.md:12
-msgid "Keep examples small and make sure they compile."
+#: manual/tutorial/core.md:10
+msgid "Quick start"
 msgstr ""
 
-#: manual/tutorial/core.md:14
+#: manual/tutorial/core.md:18
+msgid "Import the package in the `moon.pkg` of an executable package:"
+msgstr ""
+
+#: manual/tutorial/core.md:28
+msgid "The smallest useful program prints the greeting:"
+msgstr ""
+
+#: manual/tutorial/core.md:36
+msgid "`moon run` prints:"
+msgstr ""
+
+#: manual/tutorial/core.md:42
+msgid "Everyday tasks"
+msgstr ""
+
+#: manual/tutorial/core.md:46
+msgid "Build a message from the greeting"
+msgstr ""
+
+#: manual/tutorial/core.md:48
+msgid "`hello` returns an ordinary `String`, so you can interpolate it like any other value:"
+msgstr ""
+
+#: manual/tutorial/core.md:61
+msgid "Pin the greeting in a test"
+msgstr ""
+
+#: manual/tutorial/core.md:63
+msgid "A snapshot test records the exact value. Because `hello` has no inputs, this one test covers its whole behaviour:"
+msgstr ""
+
+#: manual/tutorial/core.md:72
+msgid "`moon test` reports:"
+msgstr ""
+
+#: manual/tutorial/core.md:78
+msgid "When an intended change alters the text, `moon test --update` rewrites the `content` argument for you."
+msgstr ""
+
+#: manual/tutorial/core.md:81
+msgid "Check properties instead of the exact text"
+msgstr ""
+
+#: manual/tutorial/core.md:83
+msgid "When your code only relies on part of the greeting, test that part, so the test states what you depend on:"
+msgstr ""
+
+#: manual/tutorial/core.md:95
+msgid "Pass the greeting as a function value"
+msgstr ""
+
+#: manual/tutorial/core.md:97
+msgid "`hello` has the type `() -> String`, so you can hand it to code that expects a message source, and substitute another source in tests:"
+msgstr ""
+
+#: manual/tutorial/core.md:119
+msgid "Going further"
+msgstr ""
+
+#: manual/tutorial/core.md:121
+msgid "The package has no traits or types to extend, so going further means treating the greeting as data. Pass `@luna-template.hello` wherever your code needs a `() -> String`, as in `banner` above, and pass a different closure in tests: `banner(() => \"x\")` exercises the same code without the dependency. Calling `hello` costs constant time, so there is no need to cache its result. There is no error handling to do either: `hello` cannot fail."
+msgstr ""
+
+#: manual/tutorial/core.md:128
+msgid "Common pitfalls"
+msgstr ""
+
+#: manual/tutorial/core.md:130
+msgid "In a blackbox test (`*_test.mbt`), write `@luna-template.hello()`. An unqualified `hello()` triggers the `test_unqualified_package` warning, and Luna-Flow repositories keep `moon check` free of warnings."
+msgstr ""
+
+#: manual/tutorial/core.md:133
+msgid "`inspect` prints a `String` without quotes, so the snapshot is `content=\"hello from Luna-Flow\"`, not `content=\"\\\"hello from Luna-Flow\\\"\"`."
+msgstr ""
+
+#: manual/tutorial/core.md:135
+msgid "The greeting is not translated. The manual is available in several languages, but `hello` always returns the English text."
+msgstr ""
+
+#: manual/tutorial/core.md:138
 msgid "Next steps"
 msgstr ""
 
-#: manual/tutorial/core.md:16
-msgid "See the [API reference](../api/core.md) for every public name and the [design note](../design/core.md) for why the package works as it does."
+#: manual/tutorial/core.md:140
+msgid "The [API reference](../api/core.md) states the exact signature and law of `hello`, and the [design note](../design/core.md) explains why the package is a constant function and why one test is enough. To see the same page structure applied to real algebra, read the manual of [luna-generic](https://lunaflow.cn/en/luna-generic/)."
 msgstr ""

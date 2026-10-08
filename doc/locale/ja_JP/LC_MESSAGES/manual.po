@@ -8,97 +8,318 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: conf.json:summary
-msgid "Template repository for Luna-Flow MoonBit packages."
-msgstr "Luna-Flow の MoonBit パッケージ用テンプレートリポジトリ。"
+msgid "Starter repository with the build, test, CI and documentation setup shared by every Luna-Flow MoonBit library."
+msgstr "すべての Luna-Flow MoonBit ライブラリが共有するビルド、テスト、CI、ドキュメントの構成を備えたスターターリポジトリ。"
 
 #: manual/api/core.md:1
-msgid "Core API"
-msgstr "Core API"
+msgid "core API"
+msgstr "core API"
 
-#: manual/api/core.md:3
-msgid "Replace this page with the public API of the package. `pkg.generated.mbti` is the authority: document every public name it lists, grouped by purpose, and nothing else."
-msgstr "このページを、パッケージの公開 API に置き換えてください。`pkg.generated.mbti` が基準です。そこに列挙されたすべての公開名を用途ごとにまとめて記述し、それ以外は記述しません。"
+#: manual/api/core.md:5
+msgid "The root package of `Luna-Flow/luna-template`, imported as `@luna-template`, exports one function. Its public surface, as recorded in `src/pkg.generated.mbti`, is:"
+msgstr "`Luna-Flow/luna-template` のルートパッケージは `@luna-template` としてインポートされ、関数を 1 つだけエクスポートします。`src/pkg.generated.mbti` に記録された公開インターフェースは次のとおりです。"
 
-#: manual/api/core.md:9
-msgid "Returns the fixed greeting `\"hello from Luna-Flow\"`."
-msgstr "固定の挨拶文 `\"hello from Luna-Flow\"` を返します。"
+#: manual/api/core.md:15
+msgid "Greeting"
+msgstr "挨拶"
+
+#: manual/api/core.md:21
+msgid "Returns the fixed greeting `hello from Luna-Flow`."
+msgstr "固定の挨拶文 `hello from Luna-Flow` を返します。"
+
+#: manual/api/core.md:27
+msgid "`hello` takes no arguments and returns the same 20-character string on every call. It has no preconditions, never raises and never aborts, and it runs in constant time. Because it has no inputs and no effects, it satisfies the law"
+msgstr "`hello` は引数を取らず、呼び出すたびに同じ 20 文字の文字列を返します。事前条件はなく、エラーを送出することも中断することもなく、定数時間で動作します。入力も副作用もないため、次の法則を満たします。"
+
+#: manual/api/core.md:35
+msgid "on every backend, so any call can be replaced by the literal. The [design note](../design/core.md) explains why a constant function was chosen and why a single test checks it completely."
+msgstr "これはどのバックエンドでも成り立つので、どの呼び出しもリテラルに置き換えられます。[設計ノート](../design/core.md)では、定数関数を選んだ理由と、1 つのテストで完全に検査できる理由を説明しています。"
 
 #: manual/design/core.md:1
-msgid "Core design"
-msgstr "Core の設計"
+msgid "core design"
+msgstr "core の設計"
 
-#: manual/design/core.md:3
-msgid "Replace this page with the design of the package: the goals it serves, the constraints it works under, the decisions taken and the alternatives rejected."
-msgstr "このページを、パッケージの設計に置き換えてください。パッケージが目指す目標、前提となる制約、下した決定、採用しなかった代替案を記述します。"
+#: manual/design/core.md:5
+msgid "Design goal"
+msgstr "設計の目標"
 
-#: manual/design/core.md:6
-msgid "Decisions"
-msgstr "決定事項"
+#: manual/design/core.md:7
+msgid "The root package exists so that a repository created from the template is complete on its first commit. Continuous integration needs code to build on every backend, `moon info` needs a public item to record in the interface file, the test suite needs a behaviour to check, and each chapter of the manual needs an item to describe. `hello` is the smallest item that serves all four, and its behaviour can be stated exactly in one equation."
+msgstr "ルートパッケージは、テンプレートから作成したリポジトリが最初のコミットの時点で完全であるようにするために存在します。継続的インテグレーションにはすべてのバックエンドでビルドできるコードが、`moon info` にはインターフェースファイルに記録する公開項目が、テストスイートには検査する振る舞いが、マニュアルの各章には説明する項目が必要です。`hello` はこの 4 つすべてを満たす最小の項目であり、その振る舞いは 1 つの等式で正確に述べられます。"
 
-#: manual/design/core.md:8
-msgid "Give each important decision its own section. State the decision, the reason for it, and the alternatives that were considered."
-msgstr "重要な決定ごとに節を分けます。決定の内容、その理由、検討した代替案を記述します。"
+#: manual/design/core.md:14
+msgid "Mathematical background"
+msgstr "数学的背景"
 
-#: manual/design/core.md:11
+#: manual/design/core.md:18
+msgid "Read a MoonBit type as the set of its values. The type `Unit` has exactly one value, so it is the one-point set $\\mathbf{1} = \\{\\star\\}$, and a function that takes no arguments and has no effects is a function $f : \\mathbf{1} \\to S$. Such a function is determined by its single value."
+msgstr "MoonBit の型をその値の集合とみなします。型 `Unit` の値はちょうど 1 つなので、これは一点集合 $\\mathbf{1} = \\{\\star\\}$ であり、引数を取らず副作用のない関数は関数 $f : \\mathbf{1} \\to S$ です。このような関数はただ 1 つの値で決まります。"
+
+#: manual/design/core.md:29
+msgid "The two maps are inverse to each other. For every $s \\in S$ and every $f : \\mathbf{1} \\to S$:"
+msgstr "この 2 つの写像は互いに逆です。任意の $s \\in S$ と任意の $f : \\mathbf{1} \\to S$ について、"
+
+#: manual/design/core.md:41
+msgid "So $\\operatorname{Hom}(\\mathbf{1}, S) \\cong S$: specifying a pure function without arguments is the same as specifying one value.[^unit] The attachment writes the argument out in full."
+msgstr "したがって $\\operatorname{Hom}(\\mathbf{1}, S) \\cong S$ です。引数のない純粋関数を指定することは、値を 1 つ指定することと同じです。[^unit] 添付資料ではこの議論を省略せずに書いています。"
+
+#: manual/design/core.md:45
+msgid "In category theory this says that the one-point set is a generator of the category of sets: a set is recovered from the maps out of $\\mathbf{1}$."
+msgstr "圏論の言葉では、一点集合は集合の圏の生成元である、ということです。集合は $\\mathbf{1}$ からの写像によって復元できます。"
+
+#: manual/design/core.md:48
+msgid "[Constant functions and the unit type](../../attachments/design_core_constant-functions.typ)"
+msgstr "[定数関数とユニット型](../../attachments/design_core_constant-functions.typ)"
+
+#: manual/design/core.md:50
+msgid "Design decisions"
+msgstr "設計上の決定"
+
+#: manual/design/core.md:52
+msgid "A constant function as the only item"
+msgstr "唯一の項目としての定数関数"
+
+#: manual/design/core.md:54
+msgid "The problem is to give a new repository one public item whose behaviour can be documented and tested completely, on every backend, without tying the template to a mathematical domain. Three shapes were considered: a constant function `hello() -> String`, a function of an argument such as `greet(name) -> String`, and a constant value `pub let greeting : String`."
+msgstr "解決すべき問題は、新しいリポジトリに、すべてのバックエンドで完全に文書化でき完全にテストできる公開項目を 1 つ用意し、しかもテンプレートを特定の数学分野に結び付けないことです。検討した形は 3 つあります。定数関数 `hello() -> String`、`greet(name) -> String` のような引数を取る関数、そして定数値 `pub let greeting : String` です。"
+
+#: manual/design/core.md:60
+msgid "The constant function was chosen. By the background above, its whole specification is the single equation $\\texttt{hello}() = \\texttt{\"hello from Luna-Flow\"}$, so the API page can state it exactly and the tests can check it exactly. A function of an argument has one equation per input string, infinitely many, so any test only samples it. A constant value is just as simple, but it would model a `pub let` item rather than the function signatures that real packages mostly export."
+msgstr "定数関数を選びました。上の背景から、その仕様全体はただ 1 つの等式 $\\texttt{hello}() = \\texttt{\"hello from Luna-Flow\"}$ なので、API ページはそれを正確に述べられ、テストもそれを正確に検査できます。引数を取る関数は入力文字列ごとに等式が 1 つずつ、つまり無限個あるので、どのテストも標本を調べるにすぎません。定数値も同じく単純ですが、それは `pub let` 項目の手本になってしまい、実際のパッケージが主にエクスポートする関数シグネチャの手本にはなりません。"
+
+#: manual/design/core.md:68
+msgid "One snapshot test is exhaustive"
+msgstr "1 つのスナップショットテストで網羅できる"
+
+#: manual/design/core.md:70
+msgid "A test suite proves correctness only when it covers every input. For `hello` the input set is $\\mathbf{1}$, so the count of cases is"
+msgstr "テストスイートが正しさを証明できるのは、すべての入力を網羅したときだけです。`hello` の入力集合は $\\mathbf{1}$ なので、ケースの数は"
+
+#: manual/design/core.md:77
+msgid "and a single passing `inspect(@luna-template.hello(), content=c)` shows $\\texttt{hello} = \\Psi(c)$, that is, the function equals its specification. The package therefore has one test and no property tests; adding more would check nothing new."
+msgstr "であり、`inspect(@luna-template.hello(), content=c)` が 1 つ通れば $\\texttt{hello} = \\Psi(c)$、つまり関数がその仕様に等しいことが示されます。そのためこのパッケージのテストは 1 つだけで、性質テストはありません。テストを増やしても新しいことは何も検査されません。"
+
+#: manual/design/core.md:82
+msgid "The root package is documented as `core`"
+msgstr "ルートパッケージは `core` として文書化する"
+
+#: manual/design/core.md:84
+msgid "The standard names a page after the package path under the source root. The root package has the empty path, so the template uses the name `core`, as `luna-generic` does. A repository that adds `src/<path>` documents it as `<path>.md` in each chapter."
+msgstr "標準では、ページにはソースルート以下のパッケージパスにちなんだ名前を付けます。ルートパッケージのパスは空なので、テンプレートは `luna-generic` と同じく `core` という名前を使います。`src/<path>` を追加したリポジトリは、それを各章で `<path>.md` として文書化します。"
+
+#: manual/design/core.md:89
+msgid "Correctness / invariants"
+msgstr "正しさ / 不変条件"
+
+#: manual/design/core.md:91
+msgid "**Determinism.** `hello` reads no state and performs no effects, so $\\texttt{hello}() = \\texttt{hello}()$ for any two calls, on any backend."
+msgstr "**決定性。** `hello` は状態を読まず副作用もないので、どのバックエンドでも任意の 2 回の呼び出しについて $\\texttt{hello}() = \\texttt{hello}()$ です。"
+
+#: manual/design/core.md:93
+msgid "**Length.** The result has $5 + 1 + 4 + 1 + 9 = 20$ UTF-16 code units, for `hello`, the two spaces, `from` and `Luna-Flow`. The test asserts this."
+msgstr "**長さ。** 結果は `hello`、2 つの空白、`from`、`Luna-Flow` からなる $5 + 1 + 4 + 1 + 9 = 20$ 個の UTF-16 コード単位です。テストはこれを検査します。"
+
+#: manual/design/core.md:95
+msgid "**Portability.** The package has no target-specific files, so `wasm-gc`, `wasm`, `js` and `native` build the same code; `just check-all` and `just test-all` check all four."
+msgstr "**移植性。** このパッケージにはターゲット固有のファイルがないので、`wasm-gc`、`wasm`、`js`、`native` は同じコードをビルドします。`just check-all` と `just test-all` は 4 つすべてを検査します。"
+
+#: manual/design/core.md:98
+msgid "**Cost.** A call returns a string literal and takes constant time."
+msgstr "**コスト。** 呼び出しは文字列リテラルを返し、定数時間で終わります。"
+
+#: manual/design/core.md:100
+msgid "Alternatives rejected"
+msgstr "採用しなかった案"
+
+#: manual/design/core.md:102
+msgid "**An empty package.** It leaves the interface file, the tests and the API page with nothing to check, so mistakes in the setup go unnoticed until the first real item arrives."
+msgstr "**空のパッケージ。** インターフェースファイル、テスト、API ページのいずれにも検査するものがなくなり、構成の誤りが最初の本物の項目が加わるまで見過ごされます。"
+
+#: manual/design/core.md:105
+msgid "**A small numeric example.** It would tie the template to one domain and to the Luna-Flow packages that domain needs, and every new repository would have to remove those dependencies first."
+msgstr "**小さな数値計算の例。** テンプレートを特定の分野と、その分野が必要とする Luna-Flow パッケージに結び付けてしまい、新しいリポジトリはまずそれらの依存関係を取り除かなければなりません。"
+
+#: manual/design/core.md:108
+msgid "**A greeting with an argument.** As derived above, it cannot be tested exhaustively, which would make the model test suite misleading."
+msgstr "**引数を取る挨拶関数。** 上で導いたとおり網羅的にテストできないので、手本となるテストスイートが誤解を招くものになります。"
+
+#: manual/design/core.md:111
 msgid "Boundaries"
 msgstr "境界"
 
-#: manual/design/core.md:13
-msgid "End with what the package deliberately does not do."
-msgstr "最後に、このパッケージが意図的に扱わないことを記述します。"
+#: manual/design/core.md:113
+msgid "The package does not read input, print, or depend on any other package. It does not localise the greeting: the manual is translated, but `hello` always returns the English text. It is not meant to be depended on; a repository created from the template replaces it with its own packages."
+msgstr "このパッケージは入力を読まず、出力もせず、他のパッケージにも依存しません。挨拶文のローカライズも行いません。マニュアルは翻訳されますが、`hello` は常に英語のテキストを返します。また、依存されることを想定したものでもありません。テンプレートから作成したリポジトリは、これを自分のパッケージに置き換えます。"
 
 #: manual/index.md:1
-msgid "Luna-Flow template"
-msgstr "Luna-Flow テンプレート"
+msgid "template"
+msgstr "template"
 
-#: manual/index.md:3
-msgid "Replace this page with an overview of the repository: what it provides, who it is for, and where a reader should start."
-msgstr "このページを、リポジトリの概要に置き換えてください。何を提供するのか、誰を対象とするのか、読者がどこから読み始めればよいのかを記述します。"
+#: manual/index.md:5
+msgid "The `template` repository, with the MoonBit module `Luna-Flow/luna-template`, is the starter repository that every new Luna-Flow MoonBit library is created from. It contains the build, test, CI and documentation setup that the organisation expects, and one small root package with a single function, `hello`, so that each of those pieces has something real to check from the first commit. This manual documents that package, and it is written to serve as a model of the [documentation standard](https://lunaflow.cn/en/contribute/documentation_standard/): when you start a new repository, keep the structure of these pages and replace their content."
+msgstr "`template` リポジトリ（MoonBit モジュールは `Luna-Flow/luna-template`）は、新しい Luna-Flow MoonBit ライブラリを作るときの出発点となるリポジトリです。組織が求めるビルド、テスト、CI、ドキュメントの構成と、関数 `hello` を 1 つだけ持つ小さなルートパッケージを含んでおり、これらの各部分が最初のコミットから実際に検査できる対象を持ちます。このマニュアルはそのパッケージを文書化するとともに、[ドキュメント標準](https://lunaflow.cn/en/contribute/documentation_standard/)の手本となるように書かれています。新しいリポジトリを始めるときは、これらのページの構成を保ったまま内容を置き換えてください。"
 
-#: manual/index.md:6
+#: manual/index.md:15
 msgid "Packages"
 msgstr "パッケージ"
 
-#: manual/index.md:8
+#: manual/index.md:19
 msgid "Package"
 msgstr "パッケージ"
 
-#: manual/index.md:8
+#: manual/index.md:19
+msgid "Import path"
+msgstr "インポートパス"
+
+#: manual/index.md:19
 msgid "Contents"
 msgstr "内容"
 
-#: manual/index.md:10
-msgid "One sentence on what the package provides."
-msgstr "パッケージが提供するものを一文で説明します。"
+#: manual/index.md:19
+msgid "Pages"
+msgstr "ページ"
 
-#: manual/index.md:12
-msgid "Add one row for every documented package. Each documented package has a page in the API, Design and Tutorial chapters, named after its path under `src/`; this template's root package is documented as `core`."
-msgstr "ドキュメント化するパッケージごとに一行を追加します。ドキュメント化された各パッケージは API、設計、チュートリアルの各章に一ページずつを持ち、ページ名は `src/` 以下のパスに従います。このテンプレートのルートパッケージは `core` として記述します。"
+#: manual/index.md:21
+msgid "The fixed greeting `hello`."
+msgstr "固定の挨拶文 `hello`。"
 
-#: manual/index.md:16
-msgid "Writing the manual"
-msgstr "マニュアルの書き方"
+#: manual/index.md:21
+msgid "[API](api/core.md) · [Tutorial](tutorial/core.md) · [Design](design/core.md)"
+msgstr "[API](api/core.md) · [チュートリアル](tutorial/core.md) · [設計](design/core.md)"
 
-#: manual/index.md:18
-msgid "English pages in `doc/manual` are the only source. After editing them, run `lunadoc update` to refresh the translation catalogs in `doc/locale`, and `lunadoc check` before opening a pull request. The [documentation standard](https://luna-flow.github.io/en/contribute/documentation_standard/) describes the layout and what each page contains."
-msgstr "`doc/manual` の英語ページが唯一のソースです。編集したら `lunadoc update` を実行して `doc/locale` の翻訳カタログを更新し、プルリクエストを出す前に `lunadoc check` を実行します。ディレクトリ構成と各ページの内容については[ドキュメント標準](https://luna-flow.github.io/en/contribute/documentation_standard/)を参照してください。"
+#: manual/index.md:23
+msgid "The package at the source root (`src/`) is documented under the name `core`. A package at `src/<path>` would be documented as `api/<path>.md`, `tutorial/<path>.md` and `design/<path>.md`."
+msgstr "ソースルート（`src/`）にあるパッケージは `core` という名前で文書化されます。`src/<path>` にあるパッケージは `api/<path>.md`、`tutorial/<path>.md`、`design/<path>.md` として文書化されます。"
+
+#: manual/index.md:27
+msgid "Reading paths"
+msgstr "読み進め方"
+
+#: manual/index.md:29
+msgid "If you are new to the package, start with the [tutorial](tutorial/core.md): it installs the module, calls `hello` and pins its value in a test. If you already use it, the [API reference](api/core.md) lists every public name with its exact signature and semantics. If you want to change the package, or create a new repository from this template, read the [design note](design/core.md) for the reasoning behind it and [CONTRIBUTING.md](../../CONTRIBUTING.md) for the workflow."
+msgstr "このパッケージが初めてなら、[チュートリアル](tutorial/core.md)から始めてください。モジュールをインストールし、`hello` を呼び出し、その値をテストで固定します。すでに使っているなら、[API リファレンス](api/core.md)にすべての公開名とその正確なシグネチャ、意味が載っています。パッケージを変更したい場合や、このテンプレートから新しいリポジトリを作る場合は、背景にある理由について[設計ノート](design/core.md)を、作業の流れについて [CONTRIBUTING.md](../../CONTRIBUTING.md) を読んでください。"
+
+#: manual/index.md:37
+msgid "Toolchain"
+msgstr "ツールチェーン"
+
+#: manual/index.md:39
+msgid "The module uses the `moon.mod` and `moon.pkg` manifest syntax and needs MoonBit `moonc` 0.10 or later. Local workflows run through `just`; the manual is checked with `lunadoc`, which needs Node.js, and Typst attachments need `typst`."
+msgstr "このモジュールは `moon.mod` と `moon.pkg` のマニフェスト構文を使い、MoonBit `moonc` 0.10 以降が必要です。ローカルの作業は `just` で実行します。マニュアルは `lunadoc` で検査し、これには Node.js が必要です。Typst の添付資料には `typst` が必要です。"
+
+#: manual/index.md:44
+msgid "Installation"
+msgstr "インストール"
+
+#: manual/index.md:46
+#: manual/tutorial/core.md:12
+msgid "Add the module to your project:"
+msgstr "モジュールをプロジェクトに追加します。"
+
+#: manual/index.md:52
+msgid "Then import the package in the `moon.pkg` of the package that uses it:"
+msgstr "次に、それを使うパッケージの `moon.pkg` でパッケージをインポートします。"
+
+#: manual/index.md:60
+msgid "The package is then available as `@luna-template`."
+msgstr "これでパッケージを `@luna-template` として使えます。"
 
 #: manual/tutorial/core.md:1
-msgid "Core tutorial"
-msgstr "Core チュートリアル"
+msgid "core tutorial"
+msgstr "core チュートリアル"
 
-#: manual/tutorial/core.md:3
-msgid "Replace this page with a task worked from start to finish. State the goal in the first paragraph; here the goal is to call the package's only function."
-msgstr "このページを、最初から最後まで通して行う一つの作業に置き換えてください。最初の段落で目標を示します。ここでの目標は、パッケージ唯一の関数を呼び出すことです。"
+#: manual/tutorial/core.md:5
+msgid "This tutorial takes you from adding `luna-template` to a project to using its greeting in your own code and tests. By the end you can call `hello`, build messages from it, pass it around as a function value and pin its value in a test."
+msgstr "このチュートリアルでは、`luna-template` をプロジェクトに追加するところから、その挨拶文を自分のコードとテストで使うところまでを扱います。読み終えると、`hello` を呼び出し、それからメッセージを組み立て、関数値として受け渡し、その値をテストで固定できるようになります。"
 
-#: manual/tutorial/core.md:12
-msgid "Keep examples small and make sure they compile."
-msgstr "例は小さく保ち、コンパイルできることを確認してください。"
+#: manual/tutorial/core.md:10
+msgid "Quick start"
+msgstr "クイックスタート"
 
-#: manual/tutorial/core.md:14
+#: manual/tutorial/core.md:18
+msgid "Import the package in the `moon.pkg` of an executable package:"
+msgstr "実行可能パッケージの `moon.pkg` でパッケージをインポートします。"
+
+#: manual/tutorial/core.md:28
+msgid "The smallest useful program prints the greeting:"
+msgstr "最小の実用的なプログラムは挨拶文を出力します。"
+
+#: manual/tutorial/core.md:36
+msgid "`moon run` prints:"
+msgstr "`moon run` の出力："
+
+#: manual/tutorial/core.md:42
+msgid "Everyday tasks"
+msgstr "日常的なタスク"
+
+#: manual/tutorial/core.md:46
+msgid "Build a message from the greeting"
+msgstr "挨拶文からメッセージを組み立てる"
+
+#: manual/tutorial/core.md:48
+msgid "`hello` returns an ordinary `String`, so you can interpolate it like any other value:"
+msgstr "`hello` は普通の `String` を返すので、ほかの値と同じように文字列補間に使えます。"
+
+#: manual/tutorial/core.md:61
+msgid "Pin the greeting in a test"
+msgstr "テストで挨拶文を固定する"
+
+#: manual/tutorial/core.md:63
+msgid "A snapshot test records the exact value. Because `hello` has no inputs, this one test covers its whole behaviour:"
+msgstr "スナップショットテストは正確な値を記録します。`hello` には入力がないので、この 1 つのテストでその振る舞い全体を網羅できます。"
+
+#: manual/tutorial/core.md:72
+msgid "`moon test` reports:"
+msgstr "`moon test` の報告："
+
+#: manual/tutorial/core.md:78
+msgid "When an intended change alters the text, `moon test --update` rewrites the `content` argument for you."
+msgstr "意図した変更でテキストが変わったときは、`moon test --update` が `content` 引数を書き換えてくれます。"
+
+#: manual/tutorial/core.md:81
+msgid "Check properties instead of the exact text"
+msgstr "正確なテキストの代わりに性質を検査する"
+
+#: manual/tutorial/core.md:83
+msgid "When your code only relies on part of the greeting, test that part, so the test states what you depend on:"
+msgstr "コードが挨拶文の一部にしか依存しないなら、その部分だけをテストして、何に依存しているかをテストで表します。"
+
+#: manual/tutorial/core.md:95
+msgid "Pass the greeting as a function value"
+msgstr "挨拶文を関数値として渡す"
+
+#: manual/tutorial/core.md:97
+msgid "`hello` has the type `() -> String`, so you can hand it to code that expects a message source, and substitute another source in tests:"
+msgstr "`hello` の型は `() -> String` なので、メッセージの供給元を受け取るコードに渡すことができ、テストでは別の供給元に差し替えられます。"
+
+#: manual/tutorial/core.md:119
+msgid "Going further"
+msgstr "さらに進んで"
+
+#: manual/tutorial/core.md:121
+msgid "The package has no traits or types to extend, so going further means treating the greeting as data. Pass `@luna-template.hello` wherever your code needs a `() -> String`, as in `banner` above, and pass a different closure in tests: `banner(() => \"x\")` exercises the same code without the dependency. Calling `hello` costs constant time, so there is no need to cache its result. There is no error handling to do either: `hello` cannot fail."
+msgstr "このパッケージには拡張できるトレイトや型がないので、ここでの応用は挨拶文をデータとして扱うことです。コードが `() -> String` を必要とする場所には（上の `banner` のように）`@luna-template.hello` を渡し、テストでは別のクロージャを渡します。`banner(() => \"x\")` は依存なしで同じコードを実行します。`hello` の呼び出しは定数時間なので、結果をキャッシュする必要はありません。エラー処理も不要です。`hello` は失敗しません。"
+
+#: manual/tutorial/core.md:128
+msgid "Common pitfalls"
+msgstr "よくある落とし穴"
+
+#: manual/tutorial/core.md:130
+msgid "In a blackbox test (`*_test.mbt`), write `@luna-template.hello()`. An unqualified `hello()` triggers the `test_unqualified_package` warning, and Luna-Flow repositories keep `moon check` free of warnings."
+msgstr "ブラックボックステスト（`*_test.mbt`）では `@luna-template.hello()` と書いてください。修飾のない `hello()` は `test_unqualified_package` 警告を引き起こし、Luna-Flow のリポジトリは `moon check` の警告をゼロに保っています。"
+
+#: manual/tutorial/core.md:133
+msgid "`inspect` prints a `String` without quotes, so the snapshot is `content=\"hello from Luna-Flow\"`, not `content=\"\\\"hello from Luna-Flow\\\"\"`."
+msgstr "`inspect` は `String` を引用符なしで出力するので、スナップショットは `content=\"\\\"hello from Luna-Flow\\\"\"` ではなく `content=\"hello from Luna-Flow\"` です。"
+
+#: manual/tutorial/core.md:135
+msgid "The greeting is not translated. The manual is available in several languages, but `hello` always returns the English text."
+msgstr "挨拶文は翻訳されません。マニュアルは複数の言語で読めますが、`hello` は常に英語のテキストを返します。"
+
+#: manual/tutorial/core.md:138
 msgid "Next steps"
 msgstr "次のステップ"
 
-#: manual/tutorial/core.md:16
-msgid "See the [API reference](../api/core.md) for every public name and the [design note](../design/core.md) for why the package works as it does."
-msgstr "すべての公開名については [API リファレンス](../api/core.md)を、パッケージがこのように動作する理由については[設計ノート](../design/core.md)を参照してください。"
+#: manual/tutorial/core.md:140
+msgid "The [API reference](../api/core.md) states the exact signature and law of `hello`, and the [design note](../design/core.md) explains why the package is a constant function and why one test is enough. To see the same page structure applied to real algebra, read the manual of [luna-generic](https://lunaflow.cn/en/luna-generic/)."
+msgstr "[API リファレンス](../api/core.md)は `hello` の正確なシグネチャと法則を示し、[設計ノート](../design/core.md)はこのパッケージが定数関数である理由と、テストが 1 つで十分な理由を説明しています。同じページ構成が本格的な代数にどう適用されるかは、[luna-generic](https://lunaflow.cn/en/luna-generic/) のマニュアルを読んでください。"

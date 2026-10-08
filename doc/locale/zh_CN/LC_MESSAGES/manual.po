@@ -8,97 +8,318 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: conf.json:summary
-msgid "Template repository for Luna-Flow MoonBit packages."
-msgstr "Luna-Flow MoonBit 包的模板仓库。"
+msgid "Starter repository with the build, test, CI and documentation setup shared by every Luna-Flow MoonBit library."
+msgstr "一个起步仓库，提供每个 Luna-Flow MoonBit 库共用的构建、测试、CI 与文档配置。"
 
 #: manual/api/core.md:1
-msgid "Core API"
-msgstr "Core API"
+msgid "core API"
+msgstr "core API"
 
-#: manual/api/core.md:3
-msgid "Replace this page with the public API of the package. `pkg.generated.mbti` is the authority: document every public name it lists, grouped by purpose, and nothing else."
-msgstr "请将此页面替换为该包的公开 API。`pkg.generated.mbti` 是权威来源：按用途分组记录其中列出的每个公开名称，不记录其他内容。"
+#: manual/api/core.md:5
+msgid "The root package of `Luna-Flow/luna-template`, imported as `@luna-template`, exports one function. Its public surface, as recorded in `src/pkg.generated.mbti`, is:"
+msgstr "`Luna-Flow/luna-template` 的根包以 `@luna-template` 导入，只导出一个函数。它的公开接口记录在 `src/pkg.generated.mbti` 中，内容如下："
 
-#: manual/api/core.md:9
-msgid "Returns the fixed greeting `\"hello from Luna-Flow\"`."
-msgstr "返回固定的问候语 `\"hello from Luna-Flow\"`。"
+#: manual/api/core.md:15
+msgid "Greeting"
+msgstr "问候语"
+
+#: manual/api/core.md:21
+msgid "Returns the fixed greeting `hello from Luna-Flow`."
+msgstr "返回固定的问候语 `hello from Luna-Flow`。"
+
+#: manual/api/core.md:27
+msgid "`hello` takes no arguments and returns the same 20-character string on every call. It has no preconditions, never raises and never aborts, and it runs in constant time. Because it has no inputs and no effects, it satisfies the law"
+msgstr "`hello` 不接受参数，每次调用都返回同一个长度为 20 的字符串。它没有前置条件，从不抛出错误也从不中止，运行时间为常数。由于它既没有输入也没有副作用，它满足定律"
+
+#: manual/api/core.md:35
+msgid "on every backend, so any call can be replaced by the literal. The [design note](../design/core.md) explains why a constant function was chosen and why a single test checks it completely."
+msgstr "并且在每个后端上都成立，因此任何一次调用都可以替换为该字面量。[设计说明](../design/core.md)解释了为什么选择常函数，以及为什么一个测试就能完整地检查它。"
 
 #: manual/design/core.md:1
-msgid "Core design"
-msgstr "Core 设计"
+msgid "core design"
+msgstr "core 设计"
 
-#: manual/design/core.md:3
-msgid "Replace this page with the design of the package: the goals it serves, the constraints it works under, the decisions taken and the alternatives rejected."
-msgstr "请将此页面替换为该包的设计：它服务的目标、所受的约束、做出的决策以及被否决的备选方案。"
+#: manual/design/core.md:5
+msgid "Design goal"
+msgstr "设计目标"
 
-#: manual/design/core.md:6
-msgid "Decisions"
-msgstr "决策"
+#: manual/design/core.md:7
+msgid "The root package exists so that a repository created from the template is complete on its first commit. Continuous integration needs code to build on every backend, `moon info` needs a public item to record in the interface file, the test suite needs a behaviour to check, and each chapter of the manual needs an item to describe. `hello` is the smallest item that serves all four, and its behaviour can be stated exactly in one equation."
+msgstr "根包的存在，是为了让从模板创建的仓库在第一次提交时就是完整的。持续集成需要能在每个后端上构建的代码，`moon info` 需要一个可以记录到接口文件中的公开条目，测试套件需要一个可检查的行为，手册的每一章都需要一个可描述的条目。`hello` 是能同时满足这四点的最小条目，而且它的行为可以用一个等式精确表述。"
 
-#: manual/design/core.md:8
-msgid "Give each important decision its own section. State the decision, the reason for it, and the alternatives that were considered."
-msgstr "每个重要决策单独成节。写明决策本身、做出该决策的理由，以及曾考虑过的备选方案。"
+#: manual/design/core.md:14
+msgid "Mathematical background"
+msgstr "数学背景"
 
-#: manual/design/core.md:11
+#: manual/design/core.md:18
+msgid "Read a MoonBit type as the set of its values. The type `Unit` has exactly one value, so it is the one-point set $\\mathbf{1} = \\{\\star\\}$, and a function that takes no arguments and has no effects is a function $f : \\mathbf{1} \\to S$. Such a function is determined by its single value."
+msgstr "把 MoonBit 类型看作其值的集合。类型 `Unit` 恰好有一个值，所以它是单点集 $\\mathbf{1} = \\{\\star\\}$；一个不接受参数、没有副作用的函数就是一个函数 $f : \\mathbf{1} \\to S$。这样的函数由它唯一的取值决定。"
+
+#: manual/design/core.md:29
+msgid "The two maps are inverse to each other. For every $s \\in S$ and every $f : \\mathbf{1} \\to S$:"
+msgstr "这两个映射互为逆映射。对每个 $s \\in S$ 和每个 $f : \\mathbf{1} \\to S$："
+
+#: manual/design/core.md:41
+msgid "So $\\operatorname{Hom}(\\mathbf{1}, S) \\cong S$: specifying a pure function without arguments is the same as specifying one value.[^unit] The attachment writes the argument out in full."
+msgstr "因此 $\\operatorname{Hom}(\\mathbf{1}, S) \\cong S$：给出一个无参数的纯函数，等同于给出一个值。[^unit] 附件完整写出了这一论证。"
+
+#: manual/design/core.md:45
+msgid "In category theory this says that the one-point set is a generator of the category of sets: a set is recovered from the maps out of $\\mathbf{1}$."
+msgstr "用范畴论的语言说，单点集是集合范畴的生成元：一个集合可以由从 $\\mathbf{1}$ 出发的映射还原出来。"
+
+#: manual/design/core.md:48
+msgid "[Constant functions and the unit type](../../attachments/design_core_constant-functions.typ)"
+msgstr "[常函数与单位类型](../../attachments/design_core_constant-functions.typ)"
+
+#: manual/design/core.md:50
+msgid "Design decisions"
+msgstr "设计决策"
+
+#: manual/design/core.md:52
+msgid "A constant function as the only item"
+msgstr "以一个常函数作为唯一条目"
+
+#: manual/design/core.md:54
+msgid "The problem is to give a new repository one public item whose behaviour can be documented and tested completely, on every backend, without tying the template to a mathematical domain. Three shapes were considered: a constant function `hello() -> String`, a function of an argument such as `greet(name) -> String`, and a constant value `pub let greeting : String`."
+msgstr "要解决的问题是：为新仓库提供一个公开条目，它的行为可以在每个后端上被完整地文档化和测试，同时又不把模板绑定到某个数学领域。我们考虑了三种形式：常函数 `hello() -> String`、带参数的函数（如 `greet(name) -> String`），以及常量值 `pub let greeting : String`。"
+
+#: manual/design/core.md:60
+msgid "The constant function was chosen. By the background above, its whole specification is the single equation $\\texttt{hello}() = \\texttt{\"hello from Luna-Flow\"}$, so the API page can state it exactly and the tests can check it exactly. A function of an argument has one equation per input string, infinitely many, so any test only samples it. A constant value is just as simple, but it would model a `pub let` item rather than the function signatures that real packages mostly export."
+msgstr "最终选择了常函数。根据上面的背景，它的全部规格就是一个等式 $\\texttt{hello}() = \\texttt{\"hello from Luna-Flow\"}$，因此 API 页面可以精确地陈述它，测试也可以精确地检查它。带参数的函数对每个输入字符串都有一个等式，共有无穷多个，因此任何测试都只能抽样。常量值同样简单，但它示范的是 `pub let` 条目，而真实的包大多导出的是函数签名。"
+
+#: manual/design/core.md:68
+msgid "One snapshot test is exhaustive"
+msgstr "一个快照测试即是穷尽测试"
+
+#: manual/design/core.md:70
+msgid "A test suite proves correctness only when it covers every input. For `hello` the input set is $\\mathbf{1}$, so the count of cases is"
+msgstr "只有覆盖了所有输入，测试套件才能证明正确性。对 `hello` 来说，输入集合是 $\\mathbf{1}$，所以用例的个数是"
+
+#: manual/design/core.md:77
+msgid "and a single passing `inspect(@luna-template.hello(), content=c)` shows $\\texttt{hello} = \\Psi(c)$, that is, the function equals its specification. The package therefore has one test and no property tests; adding more would check nothing new."
+msgstr "因此只要一个 `inspect(@luna-template.hello(), content=c)` 通过，就说明 $\\texttt{hello} = \\Psi(c)$，也就是函数等于它的规格。所以这个包只有一个测试，没有性质测试；再增加测试也检查不到任何新内容。"
+
+#: manual/design/core.md:82
+msgid "The root package is documented as `core`"
+msgstr "根包以 `core` 为名编写文档"
+
+#: manual/design/core.md:84
+msgid "The standard names a page after the package path under the source root. The root package has the empty path, so the template uses the name `core`, as `luna-generic` does. A repository that adds `src/<path>` documents it as `<path>.md` in each chapter."
+msgstr "文档标准以包在源码根目录下的路径为页面命名。根包的路径为空，所以模板使用 `core` 这个名字，与 `luna-generic` 相同。若仓库新增了 `src/<path>`，则在每一章中以 `<path>.md` 为其编写文档。"
+
+#: manual/design/core.md:89
+msgid "Correctness / invariants"
+msgstr "正确性 / 不变量"
+
+#: manual/design/core.md:91
+msgid "**Determinism.** `hello` reads no state and performs no effects, so $\\texttt{hello}() = \\texttt{hello}()$ for any two calls, on any backend."
+msgstr "**确定性。** `hello` 不读取任何状态，也不产生副作用，因此在任何后端上，任意两次调用都满足 $\\texttt{hello}() = \\texttt{hello}()$。"
+
+#: manual/design/core.md:93
+msgid "**Length.** The result has $5 + 1 + 4 + 1 + 9 = 20$ UTF-16 code units, for `hello`, the two spaces, `from` and `Luna-Flow`. The test asserts this."
+msgstr "**长度。** 结果有 $5 + 1 + 4 + 1 + 9 = 20$ 个 UTF-16 码元，分别来自 `hello`、两个空格、`from` 和 `Luna-Flow`。测试会断言这一点。"
+
+#: manual/design/core.md:95
+msgid "**Portability.** The package has no target-specific files, so `wasm-gc`, `wasm`, `js` and `native` build the same code; `just check-all` and `just test-all` check all four."
+msgstr "**可移植性。** 这个包没有针对特定目标的文件，因此 `wasm-gc`、`wasm`、`js` 和 `native` 构建的是同一份代码；`just check-all` 和 `just test-all` 会检查全部四个目标。"
+
+#: manual/design/core.md:98
+msgid "**Cost.** A call returns a string literal and takes constant time."
+msgstr "**开销。** 一次调用返回一个字符串字面量，耗时为常数。"
+
+#: manual/design/core.md:100
+msgid "Alternatives rejected"
+msgstr "被否决的方案"
+
+#: manual/design/core.md:102
+msgid "**An empty package.** It leaves the interface file, the tests and the API page with nothing to check, so mistakes in the setup go unnoticed until the first real item arrives."
+msgstr "**空包。** 它让接口文件、测试和 API 页面都无物可查，配置中的错误会一直被忽略，直到第一个真正的条目出现。"
+
+#: manual/design/core.md:105
+msgid "**A small numeric example.** It would tie the template to one domain and to the Luna-Flow packages that domain needs, and every new repository would have to remove those dependencies first."
+msgstr "**一个小型数值示例。** 它会把模板绑定到某个领域以及该领域所需的 Luna-Flow 包，每个新仓库都得先删除这些依赖。"
+
+#: manual/design/core.md:108
+msgid "**A greeting with an argument.** As derived above, it cannot be tested exhaustively, which would make the model test suite misleading."
+msgstr "**带参数的问候函数。** 如上文推导，它无法被穷尽测试，会让作为示范的测试套件产生误导。"
+
+#: manual/design/core.md:111
 msgid "Boundaries"
 msgstr "边界"
 
-#: manual/design/core.md:13
-msgid "End with what the package deliberately does not do."
-msgstr "最后说明该包有意不做的事情。"
+#: manual/design/core.md:113
+msgid "The package does not read input, print, or depend on any other package. It does not localise the greeting: the manual is translated, but `hello` always returns the English text. It is not meant to be depended on; a repository created from the template replaces it with its own packages."
+msgstr "这个包不读取输入、不打印输出，也不依赖任何其他包。它不对问候语做本地化：手册有翻译，但 `hello` 始终返回英文文本。它也不是供人依赖的包；从模板创建的仓库会用自己的包替换它。"
 
 #: manual/index.md:1
-msgid "Luna-Flow template"
-msgstr "Luna-Flow 模板"
+msgid "template"
+msgstr "template"
 
-#: manual/index.md:3
-msgid "Replace this page with an overview of the repository: what it provides, who it is for, and where a reader should start."
-msgstr "请将此页面替换为仓库概览：它提供什么、面向哪些读者，以及读者应从哪里开始。"
+#: manual/index.md:5
+msgid "The `template` repository, with the MoonBit module `Luna-Flow/luna-template`, is the starter repository that every new Luna-Flow MoonBit library is created from. It contains the build, test, CI and documentation setup that the organisation expects, and one small root package with a single function, `hello`, so that each of those pieces has something real to check from the first commit. This manual documents that package, and it is written to serve as a model of the [documentation standard](https://lunaflow.cn/en/contribute/documentation_standard/): when you start a new repository, keep the structure of these pages and replace their content."
+msgstr "`template` 仓库（MoonBit 模块为 `Luna-Flow/luna-template`）是每个新的 Luna-Flow MoonBit 库的起步仓库。它包含组织所要求的构建、测试、CI 与文档配置，以及一个只有单个函数 `hello` 的小型根包，使这些部分从第一次提交起就有真实的内容可以检查。本手册为这个包编写文档，同时也作为[文档标准](https://lunaflow.cn/en/contribute/documentation_standard/)的范例：创建新仓库时，请保留这些页面的结构，替换其中的内容。"
 
-#: manual/index.md:6
+#: manual/index.md:15
 msgid "Packages"
 msgstr "包"
 
-#: manual/index.md:8
+#: manual/index.md:19
 msgid "Package"
 msgstr "包"
 
-#: manual/index.md:8
+#: manual/index.md:19
+msgid "Import path"
+msgstr "导入路径"
+
+#: manual/index.md:19
 msgid "Contents"
 msgstr "内容"
 
-#: manual/index.md:10
-msgid "One sentence on what the package provides."
-msgstr "用一句话说明该包提供的功能。"
+#: manual/index.md:19
+msgid "Pages"
+msgstr "页面"
 
-#: manual/index.md:12
-msgid "Add one row for every documented package. Each documented package has a page in the API, Design and Tutorial chapters, named after its path under `src/`; this template's root package is documented as `core`."
-msgstr "为每个已文档化的包添加一行。每个已文档化的包在 API、设计和教程三个章节中各有一页，页面以其在 `src/` 下的路径命名；本模板的根包以 `core` 记录。"
+#: manual/index.md:21
+msgid "The fixed greeting `hello`."
+msgstr "固定的问候语 `hello`。"
 
-#: manual/index.md:16
-msgid "Writing the manual"
-msgstr "编写手册"
+#: manual/index.md:21
+msgid "[API](api/core.md) · [Tutorial](tutorial/core.md) · [Design](design/core.md)"
+msgstr "[API](api/core.md) · [教程](tutorial/core.md) · [设计](design/core.md)"
 
-#: manual/index.md:18
-msgid "English pages in `doc/manual` are the only source. After editing them, run `lunadoc update` to refresh the translation catalogs in `doc/locale`, and `lunadoc check` before opening a pull request. The [documentation standard](https://luna-flow.github.io/en/contribute/documentation_standard/) describes the layout and what each page contains."
-msgstr "`doc/manual` 中的英文页面是唯一的源文本。编辑后运行 `lunadoc update` 以刷新 `doc/locale` 中的翻译目录，并在提交 pull request 前运行 `lunadoc check`。[文档标准](https://luna-flow.github.io/en/contribute/documentation_standard/)说明了目录布局以及每个页面应包含的内容。"
+#: manual/index.md:23
+msgid "The package at the source root (`src/`) is documented under the name `core`. A package at `src/<path>` would be documented as `api/<path>.md`, `tutorial/<path>.md` and `design/<path>.md`."
+msgstr "位于源码根目录（`src/`）的包以 `core` 为名编写文档。位于 `src/<path>` 的包则以 `api/<path>.md`、`tutorial/<path>.md` 和 `design/<path>.md` 编写文档。"
+
+#: manual/index.md:27
+msgid "Reading paths"
+msgstr "阅读路径"
+
+#: manual/index.md:29
+msgid "If you are new to the package, start with the [tutorial](tutorial/core.md): it installs the module, calls `hello` and pins its value in a test. If you already use it, the [API reference](api/core.md) lists every public name with its exact signature and semantics. If you want to change the package, or create a new repository from this template, read the [design note](design/core.md) for the reasoning behind it and [CONTRIBUTING.md](../../CONTRIBUTING.md) for the workflow."
+msgstr "如果你初次接触这个包，请从[教程](tutorial/core.md)开始：它会安装模块、调用 `hello`，并在测试中固定其取值。如果你已经在使用它，[API 参考](api/core.md)列出了每个公开名称及其精确签名和语义。如果你想修改这个包，或从这个模板创建新仓库，请阅读[设计说明](design/core.md)了解背后的理由，并阅读 [CONTRIBUTING.md](../../CONTRIBUTING.md) 了解工作流程。"
+
+#: manual/index.md:37
+msgid "Toolchain"
+msgstr "工具链"
+
+#: manual/index.md:39
+msgid "The module uses the `moon.mod` and `moon.pkg` manifest syntax and needs MoonBit `moonc` 0.10 or later. Local workflows run through `just`; the manual is checked with `lunadoc`, which needs Node.js, and Typst attachments need `typst`."
+msgstr "本模块使用 `moon.mod` 与 `moon.pkg` 清单语法，需要 MoonBit `moonc` 0.10 或更高版本。本地工作流通过 `just` 运行；手册由 `lunadoc` 检查，它需要 Node.js，Typst 附件则需要 `typst`。"
+
+#: manual/index.md:44
+msgid "Installation"
+msgstr "安装"
+
+#: manual/index.md:46
+#: manual/tutorial/core.md:12
+msgid "Add the module to your project:"
+msgstr "把模块添加到你的项目中："
+
+#: manual/index.md:52
+msgid "Then import the package in the `moon.pkg` of the package that uses it:"
+msgstr "然后在使用它的包的 `moon.pkg` 中导入该包："
+
+#: manual/index.md:60
+msgid "The package is then available as `@luna-template`."
+msgstr "之后即可通过 `@luna-template` 使用这个包。"
 
 #: manual/tutorial/core.md:1
-msgid "Core tutorial"
-msgstr "Core 教程"
+msgid "core tutorial"
+msgstr "core 教程"
 
-#: manual/tutorial/core.md:3
-msgid "Replace this page with a task worked from start to finish. State the goal in the first paragraph; here the goal is to call the package's only function."
-msgstr "请将此页面替换为一个从头到尾完成的任务。在第一段写明目标；这里的目标是调用该包唯一的函数。"
+#: manual/tutorial/core.md:5
+msgid "This tutorial takes you from adding `luna-template` to a project to using its greeting in your own code and tests. By the end you can call `hello`, build messages from it, pass it around as a function value and pin its value in a test."
+msgstr "本教程带你从把 `luna-template` 添加到项目开始，一直到在自己的代码和测试中使用它的问候语。读完之后，你将能够调用 `hello`、用它构造消息、把它当作函数值传递，并在测试中固定它的取值。"
 
-#: manual/tutorial/core.md:12
-msgid "Keep examples small and make sure they compile."
-msgstr "示例要保持简短，并确保能够编译。"
+#: manual/tutorial/core.md:10
+msgid "Quick start"
+msgstr "快速开始"
 
-#: manual/tutorial/core.md:14
+#: manual/tutorial/core.md:18
+msgid "Import the package in the `moon.pkg` of an executable package:"
+msgstr "在一个可执行包的 `moon.pkg` 中导入该包："
+
+#: manual/tutorial/core.md:28
+msgid "The smallest useful program prints the greeting:"
+msgstr "最小的实用程序会打印问候语："
+
+#: manual/tutorial/core.md:36
+msgid "`moon run` prints:"
+msgstr "`moon run` 输出："
+
+#: manual/tutorial/core.md:42
+msgid "Everyday tasks"
+msgstr "日常任务"
+
+#: manual/tutorial/core.md:46
+msgid "Build a message from the greeting"
+msgstr "用问候语构造消息"
+
+#: manual/tutorial/core.md:48
+msgid "`hello` returns an ordinary `String`, so you can interpolate it like any other value:"
+msgstr "`hello` 返回一个普通的 `String`，因此你可以像对待其他值一样对它做字符串插值："
+
+#: manual/tutorial/core.md:61
+msgid "Pin the greeting in a test"
+msgstr "在测试中固定问候语"
+
+#: manual/tutorial/core.md:63
+msgid "A snapshot test records the exact value. Because `hello` has no inputs, this one test covers its whole behaviour:"
+msgstr "快照测试会记录精确的取值。由于 `hello` 没有输入，这一个测试就覆盖了它的全部行为："
+
+#: manual/tutorial/core.md:72
+msgid "`moon test` reports:"
+msgstr "`moon test` 报告："
+
+#: manual/tutorial/core.md:78
+msgid "When an intended change alters the text, `moon test --update` rewrites the `content` argument for you."
+msgstr "当有意的修改改变了文本时，`moon test --update` 会替你重写 `content` 参数。"
+
+#: manual/tutorial/core.md:81
+msgid "Check properties instead of the exact text"
+msgstr "检查性质而不是精确文本"
+
+#: manual/tutorial/core.md:83
+msgid "When your code only relies on part of the greeting, test that part, so the test states what you depend on:"
+msgstr "如果你的代码只依赖问候语的一部分，就只测试那一部分，让测试说明你依赖的是什么："
+
+#: manual/tutorial/core.md:95
+msgid "Pass the greeting as a function value"
+msgstr "把问候语作为函数值传递"
+
+#: manual/tutorial/core.md:97
+msgid "`hello` has the type `() -> String`, so you can hand it to code that expects a message source, and substitute another source in tests:"
+msgstr "`hello` 的类型是 `() -> String`，因此你可以把它交给需要消息来源的代码，并在测试中换成别的来源："
+
+#: manual/tutorial/core.md:119
+msgid "Going further"
+msgstr "进阶"
+
+#: manual/tutorial/core.md:121
+msgid "The package has no traits or types to extend, so going further means treating the greeting as data. Pass `@luna-template.hello` wherever your code needs a `() -> String`, as in `banner` above, and pass a different closure in tests: `banner(() => \"x\")` exercises the same code without the dependency. Calling `hello` costs constant time, so there is no need to cache its result. There is no error handling to do either: `hello` cannot fail."
+msgstr "这个包没有可以扩展的 trait 或类型，所以进阶用法就是把问候语当作数据。在代码需要 `() -> String` 的地方传入 `@luna-template.hello`（如上面的 `banner`），在测试中则传入另一个闭包：`banner(() => \"x\")` 会在不依赖本包的情况下执行同样的代码。调用 `hello` 的开销是常数，没有必要缓存结果。也没有需要处理的错误：`hello` 不会失败。"
+
+#: manual/tutorial/core.md:128
+msgid "Common pitfalls"
+msgstr "常见陷阱"
+
+#: manual/tutorial/core.md:130
+msgid "In a blackbox test (`*_test.mbt`), write `@luna-template.hello()`. An unqualified `hello()` triggers the `test_unqualified_package` warning, and Luna-Flow repositories keep `moon check` free of warnings."
+msgstr "在黑盒测试（`*_test.mbt`）中，请写 `@luna-template.hello()`。不加限定的 `hello()` 会触发 `test_unqualified_package` 警告，而 Luna-Flow 的仓库要求 `moon check` 没有警告。"
+
+#: manual/tutorial/core.md:133
+msgid "`inspect` prints a `String` without quotes, so the snapshot is `content=\"hello from Luna-Flow\"`, not `content=\"\\\"hello from Luna-Flow\\\"\"`."
+msgstr "`inspect` 打印 `String` 时不带引号，所以快照是 `content=\"hello from Luna-Flow\"`，而不是 `content=\"\\\"hello from Luna-Flow\\\"\"`。"
+
+#: manual/tutorial/core.md:135
+msgid "The greeting is not translated. The manual is available in several languages, but `hello` always returns the English text."
+msgstr "问候语不会被翻译。手册提供多种语言版本，但 `hello` 始终返回英文文本。"
+
+#: manual/tutorial/core.md:138
 msgid "Next steps"
 msgstr "下一步"
 
-#: manual/tutorial/core.md:16
-msgid "See the [API reference](../api/core.md) for every public name and the [design note](../design/core.md) for why the package works as it does."
-msgstr "参阅 [API 参考](../api/core.md)了解每个公开名称，参阅[设计说明](../design/core.md)了解该包为何如此工作。"
+#: manual/tutorial/core.md:140
+msgid "The [API reference](../api/core.md) states the exact signature and law of `hello`, and the [design note](../design/core.md) explains why the package is a constant function and why one test is enough. To see the same page structure applied to real algebra, read the manual of [luna-generic](https://lunaflow.cn/en/luna-generic/)."
+msgstr "[API 参考](../api/core.md)给出了 `hello` 的精确签名与定律，[设计说明](../design/core.md)解释了为什么这个包是一个常函数，以及为什么一个测试就足够。若想看到同样的页面结构如何应用于真正的代数，请阅读 [luna-generic](https://lunaflow.cn/en/luna-generic/) 的手册。"
