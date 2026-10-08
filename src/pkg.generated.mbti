@@ -1,0 +1,13 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "Luna-Flow/luna-template"
+
+// Values
+pub fn hello() -> String
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
