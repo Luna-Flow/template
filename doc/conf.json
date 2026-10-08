@@ -1,6 +1,6 @@
 {
   "title": "template",
-  "summary": "Template repository for Luna-Flow MoonBit packages.",
+  "summary": "Starter repository with the build, test, CI and documentation setup shared by every Luna-Flow MoonBit library.",
   "locales": [
     "zh_CN",
     "ja_JP"
