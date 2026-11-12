@@ -14,6 +14,7 @@ All notable changes to this repository are recorded here. The format follows
 
 ### Changed
 
+- Verified with `moon 0.1.20261104` and `moonc v0.10.20`; no source change was needed.
 - Require MoonBit `moonc` 0.10: blackbox tests qualify names from the package
   under test (`@luna-template.hello()`), and the contribution guide describes
   explicit method promotion through `extends.mbt` and `priv` test fixtures.

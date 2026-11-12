@@ -24,8 +24,8 @@ moon add Luna-Flow/luna-template@0.1.0
 ```
 
 Then import `"Luna-Flow/luna-template"` in your `moon.pkg`; the package is
-available as `@luna-template`. The module needs the MoonBit toolchain 0.10 or
-later (`moonc` ≥ 0.10). Local workflows run through `just`; the manual is
+available as `@luna-template`. The module needs the MoonBit toolchain 0.10.20 or
+later (`moonc` ≥ 0.10.20). Local workflows run through `just`; the manual is
 checked with `lunadoc`, which needs Node.js, and Typst attachments need
 `typst`.
 

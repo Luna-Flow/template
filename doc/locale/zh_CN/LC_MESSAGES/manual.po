@@ -212,8 +212,8 @@ msgid "Install"
 msgstr "安装"
 
 #: manual/index.md:26
-msgid "Then import `\"Luna-Flow/luna-template\"` in your `moon.pkg`; the package is available as `@luna-template`. The module needs the MoonBit toolchain 0.10 or later (`moonc` ≥ 0.10). Local workflows run through `just`; the manual is checked with `lunadoc`, which needs Node.js, and Typst attachments need `typst`."
-msgstr "然后在你的 `moon.pkg` 中导入 `\"Luna-Flow/luna-template\"`；本包以 `@luna-template` 的名字可用。本模块需要 MoonBit 工具链 0.10 或更高版本（`moonc` ≥ 0.10）。本地工作流通过 `just` 运行；手册由 `lunadoc` 检查，它需要 Node.js，Typst 附件则需要 `typst`。"
+msgid "Then import `\"Luna-Flow/luna-template\"` in your `moon.pkg`; the package is available as `@luna-template`. The module needs the MoonBit toolchain 0.10.20 or later (`moonc` ≥ 0.10.20). Local workflows run through `just`; the manual is checked with `lunadoc`, which needs Node.js, and Typst attachments need `typst`."
+msgstr "然后在你的 `moon.pkg` 中导入 `\"Luna-Flow/luna-template\"`；本包以 `@luna-template` 的名字可用。本模块需要 MoonBit 工具链 0.10.20 或更高版本（`moonc` ≥ 0.10.20）。本地工作流通过 `just` 运行；手册由 `lunadoc` 检查，它需要 Node.js，Typst 附件则需要 `typst`。"
 
 #: manual/index.md:32
 msgid "Pages"

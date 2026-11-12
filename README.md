@@ -27,7 +27,7 @@ in your `moon.pkg`.
 
 ## Requirements
 
-- MoonBit `moonc` 0.10 or later (the manifests use the `moon.mod` and
+- MoonBit `moonc` 0.10.20 or later (verified with `moon 0.1.20261104` and `moonc v0.10.20`) (the manifests use the `moon.mod` and
   `moon.pkg` syntax).
 - [`just`](https://github.com/casey/just) for local workflows.
 - Node.js and [Typst](https://typst.app/) for documentation checks.

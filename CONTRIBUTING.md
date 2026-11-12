@@ -6,7 +6,7 @@ from it. The organisation-wide guide is published at
 
 ## Toolchain
 
-- MoonBit `moonc` 0.10 or later. Manifests use the `moon.mod` and `moon.pkg`
+- MoonBit `moonc` 0.10.20 or later. Manifests use the `moon.mod` and `moon.pkg`
   syntax; do not add `moon.mod.json` or `moon.pkg.json` (`moon fmt` migrates
   old ones).
 - [`just`](https://github.com/casey/just) for the local workflows in the
